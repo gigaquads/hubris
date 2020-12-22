@@ -6,7 +6,7 @@ git_project:
     timestamp: 1608649084
   remote:
     name: origin
-    path: git@code.lib.land:gigaquads/hubris.git
+    path: git@lib.land:gigaquads/hubris.git
 project/base:
 - embryo:
     action: hatch
