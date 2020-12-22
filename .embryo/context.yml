@@ -22,6 +22,13 @@ python_project/base:
     name: python_project/base
     timestamp: 1608635757
   project: {}
+python_project/license:
+- author: Gigaquads
+  embryo:
+    action: hatch
+    name: python_project/license
+    timestamp: 1608652847
+  year: null
 python_project/package:
 - embryo:
     action: hatch
@@ -57,6 +64,26 @@ python_project/package:
     action: hatch
     name: python_project/package
     timestamp: 1608636114
+  package:
+    build: false
+    check: true
+    push: true
+    register: false
+    test: false
+- embryo:
+    action: hatch
+    name: python_project/package
+    timestamp: 1608649256
+  package:
+    build: true
+    check: true
+    push: false
+    register: false
+    test: true
+- embryo:
+    action: hatch
+    name: python_project/package
+    timestamp: 1608649279
   package:
     build: false
     check: true
