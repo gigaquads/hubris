@@ -1,0 +1,84 @@
+---
+git_project:
+- embryo:
+    action: hatch
+    name: git_project
+    timestamp: 1608649084
+  remote:
+    name: origin
+    path: git@code.lib.land:gigaquads/hubris.git
+project/base:
+- embryo:
+    action: hatch
+    name: project/base
+    timestamp: 1608635752
+  project:
+    description: ''
+    name: hubris
+    version: '0'
+python_project/base:
+- embryo:
+    action: hatch
+    name: python_project/base
+    timestamp: 1608635757
+  project: {}
+python_project/package:
+- embryo:
+    action: hatch
+    name: python_project/package
+    timestamp: 1608635881
+  package:
+    build: true
+    check: true
+    push: false
+    register: false
+    test: true
+- embryo:
+    action: hatch
+    name: python_project/package
+    timestamp: 1608636101
+  package:
+    build: true
+    check: true
+    push: false
+    register: false
+    test: true
+- embryo:
+    action: hatch
+    name: python_project/package
+    timestamp: 1608636107
+  package:
+    build: false
+    check: true
+    push: true
+    register: false
+    test: true
+- embryo:
+    action: hatch
+    name: python_project/package
+    timestamp: 1608636114
+  package:
+    build: false
+    check: true
+    push: true
+    register: false
+    test: false
+python_project/setup:
+- config:
+    find_namespace_packages: false
+    find_packages: true
+    refresh_scripts: true
+  embryo:
+    action: hatch
+    name: python_project/setup
+    timestamp: 1608635764
+  metadata:
+    classifiers: []
+    keywords: []
+  options:
+    dependency_links: []
+    install_requires: []
+    packages: []
+    scripts: []
+  project: {}
+...
