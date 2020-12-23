@@ -24,7 +24,7 @@ class Channel:
         self.log = hub.log
         self.encoder = hub.encoder
         self.name = name
-        self.filepath = os.path.join(hub.root, name)
+        self.filepath = os.path.join(hub.fifo_dir, name)
         self.read_chunk_size = 2048  # in bytes
         self.read_lock = RLock()
         self.write_lock = RLock()
