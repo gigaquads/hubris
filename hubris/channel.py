@@ -1,5 +1,4 @@
 import os
-import errno
 
 from typing import Text, Dict, Union, List, Callable
 from threading import RLock, Timer
@@ -49,6 +48,9 @@ class Channel:
         data: Union[Callable, Dict, List],
         interval: timedelta = None
     ):
+        """
+        Publish something once or at a regular interval.
+        """
         if self._publisher is None:
             self._publisher = Publisher(self)
             self._publisher.start()
@@ -66,10 +68,16 @@ class Channel:
             timer.start()
 
     def subscribe(self, callback: Callable, history: int = 1) -> 'Subscription':
+        """
+        Subscribe the current thread to this channel, invoking the callback
+        upon receipt of each data item received.
+        """
         if self._subscription is not None:
             self.log.warning(f'canceling existing {self.name} subscription')
             self._subscription.cancel()
 
+        # create subscription and start a background process that receives data
+        # and executes the callback
         self._subscription = Subscription(self, callback, history=history)
         self._subscription.start()
         return self._subscription
@@ -194,15 +202,11 @@ class Channel:
         has_error = False
 
         try:
-            os.mkfifo(self.filepath)
-        except OSError as oe: 
-            # ignore "file already exists" errors
-            if oe.errno != errno.EEXIST:
-                has_error = True
-        except Exception:
-            has_error = True
+            if os.path.exists(self.filepath):
+                os.remove(self.filepath)
 
-        if has_error:
+            os.mkfifo(self.filepath)
+        except Exception:
             self.log.exception(
                 f'mkfifo failed',
                 data={'filepath': self.filepath}
