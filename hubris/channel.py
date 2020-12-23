@@ -1,4 +1,5 @@
 import os
+import errno
 
 from typing import Text, Dict, Union, List, Callable
 from threading import RLock, Timer
@@ -202,11 +203,14 @@ class Channel:
         has_error = False
 
         try:
-            if os.path.exists(self.filepath):
-                os.remove(self.filepath)
-
             os.mkfifo(self.filepath)
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                has_error = True
         except Exception:
+            has_error = True
+
+        if has_error:
             self.log.exception(
                 f'mkfifo failed',
                 data={'filepath': self.filepath}
